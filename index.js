@@ -13,7 +13,13 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
-mongoose.connect(keys.MONGO_URI);
+
+if(process.env.NODE_ENV === 'production'){
+	mongoose.connect(keys.MONGO_URI);
+} else {
+	mongoose.connect(keys.LOCAL_MONGO_URI)
+}
+
 
 //Routes
 
@@ -49,9 +55,6 @@ app.listen(PORT, () => {
 	console.log(`Now listening on port ${PORT}`);
 });
 
-const test_url = {
-	url: 'www.google.com'
-}
 
 /* 
 Have front end

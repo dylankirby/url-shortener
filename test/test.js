@@ -3,7 +3,8 @@ const request = require('request');
 
 describe('Routes', () => {
 	it('takes in a url and posts to database', () =>{
-		assert(1==1);
+		const url = 'www.google.com'
+		request.post('http://service.com/upload', {form:{key:'value'}})
 	});
 
 	it('takes in a url, and returns a shortened url', ()=> {
