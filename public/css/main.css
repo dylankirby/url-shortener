@@ -1,0 +1,35 @@
+body {
+	background-color: darkslategray;
+	text-align: center;
+}
+
+h1 {
+	color: orange;
+	margin-bottom: 1em;
+}
+
+#link {
+	font-size: 4em;
+	color: orange;
+}
+
+#shorten-btn {
+	border: 2px solid orange;
+	background-color: aliceblue;
+}
+
+#shorten-btn:hover,
+#shorten-btn:active,
+#shorten-btn:focus {
+	background-color: orange;
+	outline: 0;
+}
+
+#url-input {
+	border: 2px solid orange;
+}
+
+#main-container {
+	width: 80%;
+	margin: 10%;
+}
