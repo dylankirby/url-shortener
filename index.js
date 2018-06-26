@@ -6,10 +6,12 @@ const bodyParser = require('body-parser');
 
 const URL = require('./models/Url');
 const keys = require('./keys');
+const routes = require('./routes/index');
 
 
 //App Setup
 const app = express();
+mongoose.Promise = global.Promise;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,34 +22,7 @@ if(process.env.NODE_ENV === 'production'){
 	mongoose.connect(keys.LOCAL_MONGO_URI)
 }
 
-
-//Routes
-
-//Get route, returns FE assets
-app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, 'views/index.html'));
-});
-
-//Takes in long form of url, posts to DB, and returns shortened url
-app.post('/api/shorten', (req, res) => {
-	const url = req.body.url;
-
-	const newUrl = {
-		url: req.body.url
-	}
-
-	URL.create(newUrl, (err, created_url) => {
-		if(err){
-			console.log("Error");
-		} else {
-			res.send(created_url);
-		}
-	});
-});
-
-app.get('/:incoming_url', (req, res) => {
-	// will handing incoming url redirects
-});
+app.use(routes);
 
 const PORT = process.env.PORT || 3000;
 
