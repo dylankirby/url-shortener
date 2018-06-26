@@ -4,10 +4,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const URL = require('./models/Url');
 const keys = require('./keys');
 const routes = require('./routes/index');
-
 
 //App Setup
 const app = express();
@@ -40,7 +38,7 @@ Steps
 
 Build basic FE
 Write tests for algo
-build algo to shorten
+Build algo to shorten
 Write API Tests
 Attach algo to api route
 Write DB Tests

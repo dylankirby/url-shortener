@@ -5,4 +5,4 @@ const urlSchema = new Schema({
 	url: String
 });
 
-mongoose.model('urls', urlSchema);
+module.exports = mongoose.model('Url', urlSchema);

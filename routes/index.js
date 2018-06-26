@@ -2,25 +2,28 @@ const express = require('express');
 const path = require('path');
 
 const router  = express.Router();
-//Routes
+
+const shorten = require('../middlewares/shorten');
+const Url = require('../models/Url');
 
 //Get route, returns FE assets
 router.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
+//Simply returns the url given to it, done for testing purposes
+router.post('/api/return', (req, res) => {
+	res.send({url: req.body.url});
+});
+
 //Takes in long form of url, posts to DB, and returns shortened url
 router.post('/api/shorten', (req, res) => {
-	// console.log('ping');
-	res.send(req.body.url);
+	console.log('ping');
 });
 
-router.post('/api/return', (req, res) => {
-	res.send(req.body.url);
-});
-
+// will handing incoming url redirects
 router.get('/:incoming_url', (req, res) => {
-	// will handing incoming url redirects
+
 });
 
 

@@ -1,27 +1,27 @@
 const assert = require('assert');
 const needle = require('needle');
 
+const base_url = 'http://localhost:3000'
+
 describe('Routes', () => {
 	it('takes in a url and returns that url', (done) =>{
 		const data = {
 			url: 'www.google.com'
 		}
 
-		needle.post('http://localhost:3000/api/return', data, (err, response) => {
+		needle.post('http://localhost:3000/api/return', data, (err, res) => {
 			if(err){
 				console.log(err);
 				assert(1==2);
 			} else {
-				assert(data.url === response.body.url);
+				console.log('here');
+				assert(data.url === res.body.url);
 				done();
 			}
 		})
 	});
 
 	it('takes in a url, and returns a shortened url', ()=> {
+		assert(1==2);
 	});
-
-	it('takes in a shortened url, and redirects to the corresponding website', () => {
-	});
-
 });
