@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const keys = require('./keys');
-const routes = require('./routes/index');
+const indexRoutes = require('./routes/index');
 
 //App Setup
 const app = express();
@@ -20,7 +20,7 @@ if(process.env.NODE_ENV === 'production'){
 	mongoose.connect(keys.LOCAL_MONGO_URI)
 }
 
-app.use(routes);
+app.use(indexRoutes);
 
 const PORT = process.env.PORT || 3000;
 
