@@ -3,7 +3,6 @@ const path = require('path');
 
 const router  = express.Router();
 
-const shorten = require('../middlewares/shorten');
 const Url = require('../models/Url');
 
 //Get route, returns FE assets
@@ -23,7 +22,7 @@ router.post('/api/shorten', (req, res) => {
 
 // will handing incoming url redirects
 router.get('/:incoming_url', (req, res) => {
-
+	
 });
 
 

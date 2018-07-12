@@ -14,14 +14,9 @@ describe('Routes', () => {
 				console.log(err);
 				assert(1==2);
 			} else {
-				console.log('here');
 				assert(data.url === res.body.url);
 				done();
 			}
 		})
-	});
-
-	it('takes in a url, and returns a shortened url', ()=> {
-		assert(1==2);
 	});
 });
