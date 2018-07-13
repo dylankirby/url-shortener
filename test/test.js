@@ -2,7 +2,7 @@ const assert = require('assert');
 const needle = require('needle');
 
 const base_url = 'http://localhost:3000'
-const data = { url: 'www.google.com' }
+const data = { url: 'www.google.com', shortHash: '3Yq' }
 
 describe('Routes', () => {
 	it('takes in a url and returns that url', (done) =>{
@@ -23,8 +23,20 @@ describe('Routes', () => {
 				console.log(err);
 				assert(1==2);
 			} else {
-				console.log(res)
+				console.log(res);
 				assert(data.url.length > res.body.url.length);
+				done();
+			}
+		});
+	});
+
+	it('Takes a shortened URL, and returns the original url', (done) => {
+		needle.get(`${base_url}/${data.shortHash}`, (err, res) => {
+			if(err){
+				console.log(err);
+				assert(1==2);
+			} else {
+				assert(res.body.url == data.url);
 				done();
 			}
 		});

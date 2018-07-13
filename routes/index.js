@@ -18,7 +18,6 @@ router.post('/api/return', (req, res) => {
 
 //Takes in long form of url, posts to DB, and returns shortened url
 router.post('/api/shorten', (req, res) => {
-	console.log('hit')
 	const { url } = req.body;
 
 	URL.findOne({url: url}, (err, foundUrl) => {
@@ -29,11 +28,8 @@ router.post('/api/shorten', (req, res) => {
 			//create new entry
 
 			//get count
-			console.log('creating');
 			URL.count({}, (err, count) => {
 				const shortened = b58.encode(count+10000);
-
-				console.log(shortened)
 
 				const newUrl = new URL({
 					url: url,
@@ -44,8 +40,6 @@ router.post('/api/shorten', (req, res) => {
 					if(err){
 						console.log(err);
 					} else {
-						console.log("created");
-						console.log(newEntry);
 						return res.status(200).send({url: newUrl.shortenedHash});
 					}
 				})
