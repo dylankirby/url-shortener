@@ -1,5 +1,5 @@
 const assert = require('assert');
-const b58 = require('../middlewares/base_58_algo');
+const b58 = require('../middlewares/base_58');
 
 const knownCase = {
 	integer: 10000,

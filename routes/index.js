@@ -2,8 +2,9 @@ const express = require('express');
 const path = require('path');
 
 const router  = express.Router();
+const b58 = require('../middlewares/base_58');
 
-const Url = require('../models/Url');
+const URL = require('../models/Url');
 
 //Get route, returns FE assets
 router.get('/', (req, res) => {
@@ -17,7 +18,40 @@ router.post('/api/return', (req, res) => {
 
 //Takes in long form of url, posts to DB, and returns shortened url
 router.post('/api/shorten', (req, res) => {
-	console.log('ping');
+	console.log('hit')
+	const { url } = req.body;
+
+	URL.findOne({url: url}, (err, foundUrl) => {
+		if(foundUrl){
+			//already exists
+			res.send({url: foundUrl.shortenedHash});
+		} else {
+			//create new entry
+
+			//get count
+			console.log('creating');
+			URL.count({}, (err, count) => {
+				const shortened = b58.encode(count+10000);
+
+				console.log(shortened)
+
+				const newUrl = new URL({
+					url: url,
+					shortenedHash: shortened
+				});
+
+				newUrl.save((err, newEntry) => {
+					if(err){
+						console.log(err);
+					} else {
+						console.log("created");
+						console.log(newEntry);
+						return res.status(200).send({url: newUrl.shortenedHash});
+					}
+				})
+			});
+		}
+	})
 });
 
 // will handing incoming url redirects
