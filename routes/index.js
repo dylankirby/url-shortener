@@ -52,9 +52,9 @@ router.get('/:incoming_url_hash', (req, res) => {
 
 	URL.findOne({shortenedHash: incoming_url_hash}, (err, foundEntry) => {
 		if(foundEntry) {
-			res.send({url: foundEntry.url});
+			res.redirect(`http://${foundEntry.url}`);
 		} else {
-			res.status(404);
+			res.status(404).send("404 - URL Not Found");
 		}
 	})
 });

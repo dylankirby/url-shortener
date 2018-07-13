@@ -1,8 +1,3 @@
-Write Tests for Algorithm ie encoding and decoding
-Set up DB to have global increment to use base10 - base 58
-Write route for algorithm
-Write Algorithm until it passes Tests for encoding and decoding
-
 Hook up FE input box to BE route -- ajax
 Test Manually
 Deploy
