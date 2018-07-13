@@ -13,6 +13,12 @@ h1 {
 	color: orange;
 }
 
+#new-url {
+	margin-top: 2em;
+	color: white;
+	font-size: 2em;
+}
+
 #shorten-btn {
 	border: 2px solid orange;
 	background-color: aliceblue;
@@ -32,4 +38,3 @@ h1 {
 #main-container {
 	width: 80%;
 	margin: 10%;
-}

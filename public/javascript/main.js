@@ -1,11 +1,17 @@
+const local_url = window.location.href;  
+
 $(document).ready(() => {
 	$('#shorten-btn').on('click', () => {
 		// Checks for url, if none display error message
-		if($('#url-input').val()){
-			let input = $('#url-input').val()
-			console.log(input);
+		let input = $('#url-input').val()
+		if(input){
+			$.post(`${local_url}api/shorten`, { url: input }, (data) => {
+				let { url } = data;
+				url = local_url + url
+				$("#short").text(url);
+			})
 		} else {
-			//no input do something
+			//no input, shake the 
 		}
 		
 		
