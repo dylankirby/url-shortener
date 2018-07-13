@@ -23,7 +23,6 @@ describe('Routes', () => {
 				console.log(err);
 				assert(1==2);
 			} else {
-				console.log(res);
 				assert(data.url.length > res.body.url.length);
 				done();
 			}

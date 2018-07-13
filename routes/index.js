@@ -24,9 +24,7 @@ router.post('/api/shorten', (req, res) => {
 		if(foundUrl){
 			//already exists
 			res.send({url: foundUrl.shortenedHash});
-		} else {
-			//create new entry
-
+		} else { 			//create new entry
 			//get count
 			URL.count({}, (err, count) => {
 				const shortened = b58.encode(count+10000);
@@ -49,8 +47,16 @@ router.post('/api/shorten', (req, res) => {
 });
 
 // will handing incoming url redirects
-router.get('/:incoming_url', (req, res) => {
-	
+router.get('/:incoming_url_hash', (req, res) => {
+	const { incoming_url_hash } = req.params;
+
+	URL.findOne({shortenedHash: incoming_url_hash}, (err, foundEntry) => {
+		if(foundEntry) {
+			res.send({url: foundEntry.url});
+		} else {
+			res.status(404);
+		}
+	})
 });
 
 
