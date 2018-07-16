@@ -1,15 +1,21 @@
-const local_url = window.location.href;  
+const local_url = window.location.href; 
+const target = $("#short");
+const container = $("#new-url");
 
 $(document).ready(() => {
 	$('#shorten-btn').on('click', () => {
 		// Checks for url, if none display error message
 		let input = $('#url-input').val()
 		if(input){
-			$.post(`${local_url}api/shorten`, { url: input }, (data) => {
-				let { url } = data;
-				url = local_url + url
-				$("#short").text(url);
+			$("#main-container").fadeOut(500, () =>{
+				$.post(`${local_url}api/shorten`, { url: input }, (data) => {
+					let { url } = data;
+					url = local_url + url
+					target.text(url);
+					container.fadeTo(500,1);
+				})				
 			})
+
 		} else {
 			//no input, shake the 
 		}

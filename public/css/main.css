@@ -14,9 +14,10 @@ h1 {
 }
 
 #new-url {
-	margin-top: 2em;
+	margin-top: 15%;
 	color: white;
 	font-size: 2em;
+	opacity: 0;
 }
 
 #shorten-btn {
@@ -38,3 +39,4 @@ h1 {
 #main-container {
 	width: 80%;
 	margin: 10%;
+}
