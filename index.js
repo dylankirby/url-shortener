@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 if(process.env.NODE_ENV === 'production'){
-	mongoose.connect(keys.MONGO_URI);
+	mongoose.connect(process.env.MONGO_URI);
 } else {
 	mongoose.connect(keys.LOCAL_MONGO_URI)
 }
