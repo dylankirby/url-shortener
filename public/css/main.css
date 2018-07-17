@@ -4,13 +4,13 @@ body {
 }
 
 h1 {
-	color: orange;
+	color: #FF8C00;
 	margin-bottom: 1em;
 }
 
 #link {
 	font-size: 4em;
-	color: orange;
+	color: #FF8C00;
 }
 
 #new-url {
@@ -21,22 +21,28 @@ h1 {
 }
 
 #shorten-btn {
-	border: 2px solid orange;
+	border: 2px solid #FF8C00;
 	background-color: aliceblue;
+	transition: background-color 0.5s ease;
 }
 
 #shorten-btn:hover,
 #shorten-btn:active,
 #shorten-btn:focus {
-	background-color: orange;
+	background-color: #FF8C00;
 	outline: 0;
 }
 
-#url-input {
-	border: 2px solid orange;
+.input {
+	border: 2px solid #FF8C00;
+}
+
+.invalid-input {
+	border-color: red !important;
 }
 
 #main-container {
 	width: 80%;
 	margin: 10%;
 }
+

@@ -5,6 +5,7 @@
 
   <title>URL Shortener</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.css">
   <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
@@ -16,26 +17,27 @@
         <h1>URL Shortener</h1>
         
         <div class="row">  
-          <div class="col-lg-12 col-md-12">
+          <div class="col-lg-2 col-md-2"></div>
+          <div class="col-lg-8 col-md-8">
             <div class="input-group input-group-lg">
-
-              <input type="text" class="form-control" id="url-input" aria-describedby="basic-addon3" placeholder="Paste URL Here">
+              <input type="text" class="form-control input" id="url-input" aria-describedby="basic-addon3" placeholder="Paste URL Here">
               <span class="input-group-btn">
-                <button class="btn" type="button" id="shorten-btn">Get me a new URL!</button>
+                <button class="btn" type="button" id="shorten-btn">Shorten URL</button>
               </span>
             </div>
           </div>
 
         </div>
       </div>
+
       <div class="container-fluid" id="new-url">
         <div class="row">
           <div class="col-lg-12 col-md-12">
             <h1>Here's your new URL</h1>
           </div>
           <div class="col-lg-12 col-md-12 text-center">
-            <span id="short"></span>
-          </div>         
+            <a id="short" href=""></a>
+          </div>     
         </div>
       </div>
 
@@ -48,6 +50,7 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.js" type="text/javascript" charset="utf-8" async defer></script>
 <script src="javascript/main.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
