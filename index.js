@@ -4,7 +4,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const keys = require('./keys');
 const indexRoutes = require('./routes/index');
 
 //App Setup
@@ -17,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 if(process.env.NODE_ENV === 'production'){
 	mongoose.connect(process.env.MONGO_URI);
 } else {
+	const keys = require('./keys');
 	mongoose.connect(keys.LOCAL_MONGO_URI)
 }
 
