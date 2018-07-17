@@ -13,11 +13,10 @@ mongoose.Promise = global.Promise;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV == 'production'){
 	mongoose.connect(process.env.MONGO_URI);
 } else {
-	const keys = require('./keys');
-	mongoose.connect(keys.LOCAL_MONGO_URI)
+	mongoose.connect('mongodb://localhost:27017/url_shortner')
 }
 
 app.use(indexRoutes);
