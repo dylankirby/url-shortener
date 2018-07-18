@@ -35,7 +35,7 @@ describe('Routes', () => {
 				console.log(err);
 				assert(1==2);
 			} else {
-				assert(res.body.url == data.url);
+				assert(res.body.includes('www.google.com'));
 				done();
 			}
 		});
