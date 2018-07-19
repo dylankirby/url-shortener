@@ -5,7 +5,7 @@ const base_url = 'http://localhost:3000'
 const data = { url: 'www.google.com', shortHash: '3Yq' }
 
 describe('Routes', () => {
-	it('takes in a url and returns that url', (done) =>{
+	xit('takes in a url and returns that url', (done) =>{
 		needle.post('http://localhost:3000/api/return', data, (err, res) => {
 			if(err){
 				console.log(err);
@@ -17,7 +17,7 @@ describe('Routes', () => {
 		})
 	});
 
-	it('Takes a url, and returns a shortened URL', (done) => {
+	xit('Takes a url, and returns a shortened URL', (done) => {
 		needle.post(`${base_url}/api/shorten`, data, (err, res) => {
 			if(err){
 				console.log(err);
@@ -29,7 +29,7 @@ describe('Routes', () => {
 		});
 	});
 
-	it('Takes a shortened URL, and returns the original url', (done) => {
+	xit('Takes a shortened URL, and returns the original url', (done) => {
 		needle.get(`${base_url}/${data.shortHash}`, (err, res) => {
 			if(err){
 				console.log(err);

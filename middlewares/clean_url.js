@@ -1,5 +1,5 @@
-const cleanUrl = (url) => {
+const clean = (url) => {
 
 }
 
-module.exports = cleanUrl;
+module.exports.clean = clean;
