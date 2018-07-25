@@ -9,7 +9,6 @@ const b58Encode = (num) => {
     num = Math.floor(num / l);
     encoded = chars[remainder].toString() + encoded;
   }
-  console.log(encoded);
   return encoded;
 }
 

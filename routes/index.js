@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 
 const router  = express.Router();
+
 const b58 = require('../middlewares/base_58');
+const cleaner = require('../middlewares/clean_url');
 
 const URL = require('../models/Url');
 
@@ -18,7 +20,9 @@ router.post('/api/return', (req, res) => {
 
 //Takes in long form of url, posts to DB, and returns shortened url
 router.post('/api/shorten', (req, res) => {
-	const { url } = req.body;
+	let { url } = req.body;
+
+	url = cleaner.clean(url);
 
 	URL.findOne({url: url}, (err, foundUrl) => {
 		if(foundUrl){
@@ -52,7 +56,7 @@ router.get('/:incoming_url_hash', (req, res) => {
 
 	URL.findOne({shortenedHash: incoming_url_hash}, (err, foundEntry) => {
 		if(foundEntry) {
-			res.redirect(`http://${foundEntry.url}`);
+			res.redirect(`https://${foundEntry.url}`);
 		} else {
 			res.status(404).send("404 - URL Not Found");
 		}
