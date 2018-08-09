@@ -21,7 +21,7 @@
           <div class="col-lg-8 col-md-6">
 						<form id="shortenForm">
             	<div class="input-group">
-								<input type="text" class="form-control" id="url-input" aria-describedby="basic-addon3" placeholder="Paste URL Here" required pattern="(https?:\/\/)?(www\.)?\w{2,}\.\w{2,}\b(\w*)" />
+								<input type="text" class="form-control" id="url-input" aria-describedby="basic-addon3" placeholder="Paste URL Here" required pattern="(https?:\/\/)?(www\.)*\w{2,}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)" />
               	<span class="input-group-btn">
                 	<button class="btn" type="submit" id="shorten-btn">Shorten URL</button>
               	</span>
