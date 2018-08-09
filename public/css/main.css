@@ -21,9 +21,9 @@ h1 {
 }
 
 #shorten-btn {
-	border: 2px solid #FF8C00;
 	background-color: aliceblue;
 	transition: background-color 0.5s ease;
+	margin-left: 1px;
 }
 
 #shorten-btn:hover,
@@ -32,13 +32,8 @@ h1 {
 	background-color: #FF8C00;
 	outline: 0;
 }
-
-.input {
-	border: 2px solid #FF8C00;
-}
-
 .invalid-input {
-	border-color: red !important;
+	border: 2px solid indianred;
 }
 
 #main-container {

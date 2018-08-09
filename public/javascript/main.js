@@ -1,25 +1,25 @@
-const local_url = window.location.href; 
+const local_url = window.location.href.split('?')[0]; 
 const target = $("#short");
 const oldUrl = $("#old-url");
 const container = $("#new-url");
 
-$(document).ready(() => {
-	$('#shorten-btn').on('click', () => {
-		// Checks for url, if none display error message
-		let input = $('#url-input').val()
-		if(input){
+function handleInput(){
+	
+}
 
-			$("#main-container").fadeOut(500, () =>{
-				$.post(`${local_url}api/shorten`, { url: input }, (data) => {
-					let { url } = data;
-					url = local_url + url
-					oldUrl.text(input);
-					target.attr("href", url).text(url);
-					container.fadeTo(500,1);
-				});				
-			});
-		} else {
-			$(".input").transition("shake").addClass("invalid-input");
-		}
+$(document).ready(() => {
+	$('form').on('submit', (e) => {
+		e.preventDefault();
+		let inputUrl = $('#url-input').val();
+		
+		$("#main-container").fadeOut(500, () =>{
+			$.post(`${local_url}api/shorten`, { url: inputUrl }, (data) => {
+				let { url } = data;
+				url = local_url + url
+				target.attr("href", url).text(url);
+				container.fadeTo(500,1);
+			});				
+		});
+		
 	});
 });
