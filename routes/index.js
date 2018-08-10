@@ -13,11 +13,6 @@ router.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
-//Simply returns the url given to it, done for testing purposes
-router.post('/api/return', (req, res) => {
-	res.send({url: req.body.url});
-});
-
 //Takes in long form of url, posts to DB, and returns shortened url
 router.post('/api/shorten', (req, res) => {
 	let { url } = req.body;
@@ -27,7 +22,7 @@ router.post('/api/shorten', (req, res) => {
 	URL.findOne({url: url}, (err, foundUrl) => {
 		if(foundUrl){
 			//already exists
-			res.send({url: foundUrl.shortenedHash});
+			res.status(200).send({url: foundUrl.shortenedHash, count: foundUrl.count});
 		} else { 			//create new entry
 			//get count
 			URL.count({}, (err, count) => {
@@ -42,7 +37,7 @@ router.post('/api/shorten', (req, res) => {
 					if(err){
 						console.log(err);
 					} else {
-						return res.status(200).send({url: newUrl.shortenedHash});
+						return res.status(200).send({url: newUrl.shortenedHash, count: "Brand New"});
 					}
 				})
 			});
@@ -53,12 +48,16 @@ router.post('/api/shorten', (req, res) => {
 // will handing incoming url redirects
 router.get('/:incoming_url_hash', (req, res) => {
 	const { incoming_url_hash } = req.params;
-
 	URL.findOne({shortenedHash: incoming_url_hash}, (err, foundEntry) => {
 		if(foundEntry) {
 			res.redirect(`https://${foundEntry.url}`);
+			URL.findOneAndUpdate({_id: foundEntry._id}, {$inc:{count: 1}}, (err, doc)=> {
+				if(err){
+					console.log(err);
+				}
+			})
 		} else {
-			res.status(404).send("404 - URL Not Found");
+			res.sendFile(path.join(__dirname, '../views/404.html'));
 		}
 	})
 });

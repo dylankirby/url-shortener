@@ -1,27 +1,39 @@
 body {
-	background-color: darkslategray;
-	text-align: center;
+	background-color: #304249;
 }
 
 h1 {
-	color: #FF8C00;
+	color: white;
 	margin-bottom: 1em;
 }
 
 #link {
 	font-size: 4em;
-	color: #FF8C00;
+	color: white;
 }
 
-#new-url {
-	margin-top: 15%;
+#new-url-box {
+	margin-top: 5%;
+	width: 80%;
 	color: white;
-	font-size: 2em;
+	font-size: 1em;
 	opacity: 0;
 }
 
+#new-url {
+	margin-top: 2%;
+}
+
+#short {
+	color: #ec5c25; 
+}
+
+#copy-btn {
+	background-color: clear;
+}
+
 #shorten-btn {
-	background-color: aliceblue;
+	background-color: #ec5c25;
 	transition: background-color 0.5s ease;
 	margin-left: 1px;
 }
@@ -29,7 +41,7 @@ h1 {
 #shorten-btn:hover,
 #shorten-btn:active,
 #shorten-btn:focus {
-	background-color: #FF8C00;
+	background-color: #e24c15;
 	outline: 0;
 }
 .invalid-input {
@@ -38,6 +50,7 @@ h1 {
 
 #main-container {
 	width: 80%;
-	margin: 10%;
+	margin: 10% 10% 0 10%;
+	text-align: center;
 }
 

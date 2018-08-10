@@ -1,25 +1,21 @@
-const local_url = window.location.href.split('?')[0]; 
-const target = $("#short");
-const oldUrl = $("#old-url");
-const container = $("#new-url");
-
-function handleInput(){
-	
-}
+const localUrl = window.location.href; 
+const container = $("#new-url-box");
+const longUrl = $("#long");
+const shortUrl = $("#short");
+const counter = $("#count");
 
 $(document).ready(() => {
 	$('form').on('submit', (e) => {
 		e.preventDefault();
 		let inputUrl = $('#url-input').val();
 		
-		$("#main-container").fadeOut(500, () =>{
-			$.post(`${local_url}api/shorten`, { url: inputUrl }, (data) => {
-				let { url } = data;
-				url = local_url + url
-				target.attr("href", url).text(url);
-				container.fadeTo(500,1);
-			});				
+		$.post(`${localUrl}api/shorten`, { url: inputUrl }, (data) => {
+			let { url, count } = data;
+			url = localUrl + url
+			longUrl.text(inputUrl);
+			counter.text(`Uses: ${count}`);
+			shortUrl.text(url);
+			container.fadeTo(1500,1);
 		});
-		
 	});
 });
