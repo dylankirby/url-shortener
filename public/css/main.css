@@ -40,6 +40,10 @@ li {
 	outline: 0;
 }
 
+#doc-btn {
+	background-color: none !important;
+}
+
 #url-list {
 	margin-top: 2.5%;
 	width: 80%;

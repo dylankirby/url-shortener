@@ -37,7 +37,7 @@ router.post('/api/shorten', (req, res) => {
 					if(err){
 						console.log(err);
 					} else {
-						return res.status(200).send({url: newUrl.shortenedHash, count: "Brand New"});
+						return res.status(200).send({url: newUrl.shortenedHash, count: 0});
 					}
 				})
 			});

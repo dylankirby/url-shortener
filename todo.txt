@@ -1,3 +1,10 @@
-Change to have a box with list of urls
-Store those urls in session storage
+Store current url list in session storage
 Make it so that similar url ie www.facebook.com/ and www.facebook.com and facebook.com don't all get their own db entry
+
+Create modal for information on the API
+Create a page for people to signup for the API
+Find a way to generate API keys
+Store list of valid API keys
+Require login on the shortening route
+Auth my app on the shortening route
+Limit calls to API to 100/hr
