@@ -1,5 +1,22 @@
 Make it so that similar url ie www.facebook.com/ and www.facebook.com and facebook.com don't all get their own db entry
 
+What do I need
+
+Ability to sign up and generate key, including routes and pages
+Ability to modify developer information
+Ability to delete developer account
+
+Restriction on API route to those with key
+Auth middleware to see if key exists
+Need to authorize my own app (CORS?)
+If yes, process input, if no, redirect to developer page
+
+Also need a docs page for information on the API service
+Add in a navbar to the homepage for people to get to docs page
+
+
+Create tests for API Auth
+Create API Auth Middleware
 Create modal for information on the API
 Create a page for people to signup for the API
 Find a way to generate API keys
