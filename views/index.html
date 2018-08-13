@@ -14,14 +14,14 @@
     <div class="container">
       <div id="main-container">
         <span class="glyphicon glyphicon-link" id="link"></span>
-        <h1>URL Shortner</h1>
+        <h1>URL Shortener</h1>
         
         <div class="row">  
-					<div class="col-lg-2 col-md-3"></div>
-          <div class="col-lg-8 col-md-6">
+					<div class="col-lg-2"></div>
+          <div class="col-lg-8">
 						<form id="shortenForm">
             	<div class="input-group">
-								<input type="text" class="form-control" id="url-input" aria-describedby="basic-addon3" placeholder="Paste URL Here" required pattern="(https?:\/\/)?(www\.)*\w{2,}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)" title="Must be a valid url"/>
+								<input type="text" class="form-control" id="url-input" aria-describedby="basic-addon3" placeholder="Paste URL Here" required pattern="(https?:\/\/)?(www\.)*\w{2,}\.[a-z]{2,}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)" title="Must be a valid url, ie www.google.com"/>
               	<span class="input-group-btn">
                 	<button class="btn" type="submit" id="shorten-btn">Shorten URL</button>
               	</span>
@@ -31,16 +31,19 @@
         </div>
       </div>
 
-      <div class="container" id="new-url-box">
+      <div id="url-list" class="container">
         <div class="row">
-          <div class="col-lg-2 col-md-3"></div>
-          <div class="col-lg-8 col-md-6">
-						<div id="long"></div>
-            <div id="new-url">
-              <span id="short"></span>
-              <span class="pull-right" id="count"></span>
-            </div>
-          </div>     
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8">
+            <transition-group name="list">
+              <div v-for="url in urls" v-bind:key="url" class="list-item">
+                <div id="long">{{url.long}}</div>
+                <div id="short">{{url.short}}</div>
+                <div id="count">Uses: {{url.count}}</div>
+                <br>
+              </div>
+            </transition-group>
+          </div>          
         </div>
       </div>
 
@@ -54,6 +57,7 @@
   crossorigin="anonymous">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.js" type="text/javascript" charset="utf-8" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="javascript/main.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
