@@ -14,18 +14,25 @@ let urlList = new Vue({
   			short,
   			count
   		});
+
   		if(this.urls.length > 4){
   			this.urls.pop();
   		}
+			
+			localStorage.setItem("urls", JSON.stringify(this.urls));
   	}
+  },
+  created: function() {
+		this.urls = JSON.parse(localStorage.urls);
   }
 });
 
 // JQuery
 $(document).ready(() => {
+	$("#url-list").fadeTo(1000, 1); // Fades the url diplay box in
 	//Form handling after a proper url is inputted
 	$('form').on('submit', (e) => {
-		$("#url-list").fadeTo(1000, 1); // Fades the url diplay box in
+
 		e.preventDefault(); // stop default form submission
 		let inputUrl = $('#url-input').val(); //get the input url
 	
@@ -37,10 +44,8 @@ $(document).ready(() => {
 				url = localUrl + url
 				//add new url to vue list data
 				urlList.add(inputUrl, url, count);
+				$("#url-input").val("")
 			});			
 		}
 	});
 });
-
-//Closing document, write urls to local storage
-
