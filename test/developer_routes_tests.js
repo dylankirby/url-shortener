@@ -27,6 +27,7 @@ describe('Developers Routes', () => {
 			.catch(() => done());
 	});
 
+
 	it('Can create a new developer account', (done) => {
 		//post to route to create a new dev account
 		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) =>{
@@ -40,6 +41,36 @@ describe('Developers Routes', () => {
 						assert(doc.name == userProps.name) //check name match
 						assert(doc.email == userProps.email) //check email match
 						assert(doc._id) //assert that the returned API key is the same as the one in the file
+						done();
+					}
+				});
+			}
+		});
+	});
+
+	it('Can get user information given an email', (done) => {
+		needle.get(`${baseUrl}/dev/user`, userProps.email, (err, res) => {
+			if(err){
+				console.log(err)
+			} else {
+				assert(res.body.user.name == userProps.name);
+				done();
+			}
+		});
+	});
+
+	it('Can update information on a developer account', (done) => {
+		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) => {
+			if(res.body) {
+				let newUserProps = {name: 'Dillon', email:'dylan0128@gmail.com'}
+
+				needle.put(`${baseUrl}/dev/user/${res.body.user._id}`, newUserProps, (err, res) => {
+					if(err){
+						console.log(err)
+					} else {
+						let updatedUser = res.body.user
+						assert(updatedUser.name == newUserProps.name)
+						assert(updatedUser.email == newUserProps.email)
 						done();
 					}
 				});
@@ -65,22 +96,7 @@ describe('Developers Routes', () => {
 		});
 	});
 
-	xit('Can update information on a developer account', (done) => {
-		needle.post(`${baseUrl}/dev/user`, userProps);
 
-		let newUserProps = {name: 'Dillon', email:'dylan0128@gmail.com'}
-
-		needle.put(`${baseUrl}/dev/user/update`, newUserProps, (err, res) => {
-			if(err){
-				console.log(err)
-			} else {
-				let { user } = res.body
-				assert(user.name == newUserProps.name)
-				assert(user.email == newUserProps.email)
-				done();
-			}
-		});
-	});
 });
 
 describe('Developer access to API routes', (done) =>{
