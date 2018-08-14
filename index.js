@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const indexRoutes = require('./routes/index');
+const devRoutes = require('./routes/developer');
 
 //App Setup
 const app = express();
@@ -20,6 +21,7 @@ if(process.env.NODE_ENV == 'production'){
 }
 
 app.use(indexRoutes);
+app.use(devRoutes);
 
 const PORT = process.env.PORT || 3000;
 

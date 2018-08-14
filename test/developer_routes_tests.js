@@ -12,7 +12,7 @@ const fakeKey = 'sfsa43853wrweajfklsdgag48923239r8aklsfjsdf'
 
 describe('Developers Routes', () => {
 	before((done) => {
-		mongoose.connect(process.env.MONGO_URI);
+		mongoose.connect('mongodb://localhost:27017/url_shortner');
 		mongoose.connection
 			.once('open', () => done())
 			.on('error', (error) => {
@@ -23,12 +23,13 @@ describe('Developers Routes', () => {
 	beforeEach((done) => {
 		const { users } = mongoose.connection.collections;
 		users.drop()
-			.then(() => done());
+			.then(() => done())
+			.catch(() => done());
 	});
 
-	xit('Can create a new developer account', (done) => {
+	it('Can create a new developer account', (done) => {
 		//post to route to create a new dev account
-		needle.post(`${baseUrl}/dev/user/create`, userProps, (err, res) =>{
+		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) =>{
 			if(err){
 				console.log(err);
 			} else {
@@ -38,7 +39,7 @@ describe('Developers Routes', () => {
 					} else {
 						assert(doc.name == userProps.name) //check name match
 						assert(doc.email == userProps.email) //check email match
-						assert(doc.key == user.key) //assert that the returned API key is the same as the one in the file
+						assert(doc._id) //assert that the returned API key is the same as the one in the file
 						done();
 					}
 				});
@@ -46,23 +47,26 @@ describe('Developers Routes', () => {
 		});
 	});
 
-	xit('Can delete a new developer account', (done)=> {
+	it('Can delete a new developer account', (done)=> {
 		//create a new dev account
-		needle.post(`${baseUrl}/dev/user/create`, userProps);
+		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) => {
+			let { user } = res.body;
+			needle.delete(`${baseUrl}/dev/user/${user._id}`, null, (err, res) => {
+				User.findById(user._id, (err, doc) => {
+					if(err){
+						console.log(err)
+					} else {
+						assert(!doc);
+						done();
+					}
+				});
+			});
 
-		//delete the previously created dev account
-		needle.post(`${baseUrl}/dev/user/delete`, userProps, (err, res) => {
-			if(err){
-				console.log(err);
-			} else {
-				assert(res.body.user === null)
-				done();
-			}
 		});
 	});
 
 	xit('Can update information on a developer account', (done) => {
-		needle.post(`${baseUrl}/dev/user/create`, userProps);
+		needle.post(`${baseUrl}/dev/user`, userProps);
 
 		let newUserProps = {name: 'Dillon', email:'dylan0128@gmail.com'}
 

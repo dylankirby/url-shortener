@@ -13,6 +13,7 @@ If yes, process input, if no, redirect to developer page
 
 Also need a docs page for information on the API service
 Add in a navbar to the homepage for people to get to docs page
+How to handle signup.... email or OAuth
 
 
 Create tests for API Auth
