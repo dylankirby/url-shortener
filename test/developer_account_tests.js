@@ -5,12 +5,11 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 
 const baseUrl = 'http://localhost:3000';
-const data = { url: 'www.google.com', shortHash: '3Yq' };
 const userProps = { name: 'Dylan', email: "dylan.kirby0128@gmail.com" };
 
-const fakeKey = 'sfsa43853wrweajfklsdgag48923239r8aklsfjsdf'
 
-describe('Developers Routes', () => {
+
+describe('Developers Account Routes', () => {
 	before((done) => {
 		mongoose.connect('mongodb://localhost:27017/url_shortner');
 		mongoose.connection
@@ -49,13 +48,15 @@ describe('Developers Routes', () => {
 	});
 
 	it('Can get user information given an email', (done) => {
-		needle.get(`${baseUrl}/dev/user`, userProps.email, (err, res) => {
-			if(err){
-				console.log(err)
-			} else {
-				assert(res.body.user.name == userProps.name);
-				done();
-			}
+		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) => {
+			needle.get(`${baseUrl}/dev/user/${userProps.email}`, (err, res) => {
+				if(err){
+					console.log(err)
+				} else {
+					assert(res.body.user.name == userProps.name);
+					done();
+				}
+			});
 		});
 	});
 
@@ -94,31 +95,5 @@ describe('Developers Routes', () => {
 			});
 
 		});
-	});
-
-
-});
-
-describe('Developer access to API routes', (done) =>{
-	xit('Cannot make an unauthorized call to the API', (done) => {
-		needle.post(`${base_url}/api/shorten`, {API_KEY: fakeKey, url: data.url}, (err, res) => {
-			if(err){
-				console.log(err)
-			} else {
-				assert(res.status == 401);
-				assert(res.body.url == null);
-			}
-		});
-	});
-
-	xit('Can make an authorized call to the API', (done) =>{
-		needle.post(`${base_url}/api/shorten`, {API_KEY: process.env.API_KEY, url: data.url}, (err, res) => {
-			if(err){
-				console.log(err)
-			} else {
-				assert(res.status == 200);
-				assert(res.body.url == data.shortHash);
-			}
-		});		
 	});
 });

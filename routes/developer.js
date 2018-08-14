@@ -5,8 +5,14 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-router.get('/dev/user', (req, res) => {
-	
+router.get('/dev/user/:email', (req, res) => {
+	User.findOne({email: req.params.email}, (err, user) => {
+		if(err){
+			return res.status(500).send(err)
+		} else {
+			return res.status(200).send({user});
+		}
+	})
 });
 
 router.post('/dev/user', (req,res) => {
