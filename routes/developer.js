@@ -29,20 +29,21 @@ router.post('/dev/user', (req,res) => {
 });
 
 router.put('/dev/user/:userId', (req, res) => {
-	User.findByIdAndUpdate(req.params.userId, {
-		$set: {
-			name: req.body.name,
-			email: req.body.email
+	User.findByIdAndUpdate(req.params.userId, 
+		{
+			$set: {
+				name: req.body.name,
+				email: req.body.email
+			}
+		}, 
+		{new: true}, 
+		(err, updatedUser) => {
+			if(err){
+				return res.status(500).send(err)
+			} else {
+				return res.status(200).send({user: updatedUser});
+			}
 		}
-	}, 
-	{new: true}, 
-	(err, updatedUser) => {
-		if(err){
-			return res.status(500).send(err)
-		} else {
-			return res.status(200).send({user: updatedUser});
-		}
-	}
 	)
 });
 

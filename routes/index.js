@@ -6,7 +6,18 @@ const router  = express.Router();
 const b58 = require('../middlewares/base_58');
 const cleaner = require('../middlewares/clean_url');
 
-const URL = require('../models/Url');
+const Url = require('../models/Url');
+const User = require('../models/User');
+
+const authMiddleware = (req, res, next) => {
+	User.findById(req.body.API_KEY, (err, doc) => {
+		if(doc){
+			return next()
+		} else {
+			res.status(401).send("Not Authorized");
+		}
+	})
+}
 
 //Get route, returns FE assets
 router.get('/', (req, res) => {
@@ -14,18 +25,18 @@ router.get('/', (req, res) => {
 });
 
 //Takes in long form of url, posts to DB, and returns shortened url
-router.post('/api/shorten', (req, res) => {
+router.post('/api/shorten', authMiddleware ,(req, res) => {
 	let { url } = req.body;
 
 	url = cleaner.clean(url);
 
-	URL.findOne({url: url}, (err, foundUrl) => {
+	Url.findOne({url: url}, (err, foundUrl) => {
 		if(foundUrl){
 			//already exists
 			res.status(200).send({url: foundUrl.shortenedHash, count: foundUrl.count});
 		} else { 			//create new entry
 			//get count
-			URL.count({}, (err, count) => {
+			Url.count({}, (err, count) => {
 				const shortened = b58.encode(count+10000);
 
 				const newUrl = new URL({
@@ -47,11 +58,10 @@ router.post('/api/shorten', (req, res) => {
 
 // will handing incoming url redirects
 router.get('/:incoming_url_hash', (req, res) => {
-	const { incoming_url_hash } = req.params;
-	URL.findOne({shortenedHash: incoming_url_hash}, (err, foundEntry) => {
+	Url.findOne({shortenedHash: req.params.incoming_url_hash}, (err, foundEntry) => {
 		if(foundEntry) {
 			res.redirect(`https://${foundEntry.url}`);
-			URL.findOneAndUpdate({_id: foundEntry._id}, {$inc:{count: 1}}, (err, doc)=> {
+			Url.findOneAndUpdate({_id: foundEntry._id}, {$inc:{count: 1}}, (err, doc)=> {
 				if(err){
 					console.log(err);
 				}

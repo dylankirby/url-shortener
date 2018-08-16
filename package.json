@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nodemon -x '_mocha -R min $@'",
     "server": "nodemon index.js",
     "start": "node index.js"
   },

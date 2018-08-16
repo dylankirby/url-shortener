@@ -7,12 +7,12 @@ const knownCase = {
 }
 
 describe('Base58 Algorithm', () => {
-	it('Takes a integer, and return a string of base 58', (done) => {
+	xit('Takes a integer, and return a string of base 58', (done) => {
 		assert(b58.encode(knownCase.integer) == knownCase.string);
 		done();
 	});
 
-	it('Takes a string, and return an integer', (done) => {
+	xit('Takes a string, and return an integer', (done) => {
 		assert(b58.decode(knownCase.string) == knownCase.integer);
 		done();
 	});

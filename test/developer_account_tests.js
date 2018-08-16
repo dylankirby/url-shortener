@@ -7,8 +7,6 @@ const User = require('../models/User');
 const baseUrl = 'http://localhost:3000';
 const userProps = { name: 'Dylan', email: "dylan.kirby0128@gmail.com" };
 
-
-
 describe('Developers Account Routes', () => {
 	before((done) => {
 		mongoose.connect('mongodb://localhost:27017/url_shortner');
@@ -27,7 +25,7 @@ describe('Developers Account Routes', () => {
 	});
 
 
-	it('Can create a new developer account', (done) => {
+	xit('Can create a new developer account', (done) => {
 		//post to route to create a new dev account
 		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) =>{
 			if(err){
@@ -47,7 +45,7 @@ describe('Developers Account Routes', () => {
 		});
 	});
 
-	it('Can get user information given an email', (done) => {
+	xit('Can get user information given an email', (done) => {
 		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) => {
 			needle.get(`${baseUrl}/dev/user/${userProps.email}`, (err, res) => {
 				if(err){
@@ -60,7 +58,7 @@ describe('Developers Account Routes', () => {
 		});
 	});
 
-	it('Can update information on a developer account', (done) => {
+	xit('Can update information on a developer account', (done) => {
 		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) => {
 			if(res.body) {
 				let newUserProps = {name: 'Dillon', email:'dylan0128@gmail.com'}
@@ -79,7 +77,7 @@ describe('Developers Account Routes', () => {
 		});
 	});
 
-	it('Can delete a new developer account', (done)=> {
+	xit('Can delete a new developer account', (done)=> {
 		//create a new dev account
 		needle.post(`${baseUrl}/dev/user`, userProps, (err, res) => {
 			let { user } = res.body;
