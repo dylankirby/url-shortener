@@ -1,6 +1,8 @@
 const localUrl = window.location.href; 
 const container = $("#url-list");
 
+const auth = "5b73403f2a1dc2638133baea"
+
 //Vue component
 let urlList = new Vue({
   el: '#url-list',
@@ -36,8 +38,8 @@ $(document).ready(() => {
 		e.preventDefault(); // stop default form submission
 		let inputUrl = $('#url-input').val(); //get the input url
 	
-		if(!($.grep(urlList._data.urls, (obj) => { return obj.long == inputUrl })).length){ // check if current url entry has already been shortend
-			$.post(`${localUrl}api/shorten`, { url: inputUrl }, (data) => { // make api call
+		if(!($.grep(urlList._data.urls, (obj) => { return obj.long == inputUrl })).length){ // check if current url entry has already been shortend and exists on vue
+			$.post(`${localUrl}api/shorten`, { url: inputUrl, API_KEY: auth }, (data) => { // make api call
 				//pull and assign api response data
 				let { url, count } = data;
 				//concatenate local url with returned shortened url hash

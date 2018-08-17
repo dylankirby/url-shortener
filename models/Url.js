@@ -2,8 +2,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const urlSchema = new Schema({
-	url: String,
-	shortenedHash: String,
+	url: {
+		type: String,
+		unique: true,
+		required: true
+	},
+	shortenedHash: {
+		type: String,
+		unique: true,
+		required: true
+	},
 	count: {
 		type: Number,
 		default: 0
