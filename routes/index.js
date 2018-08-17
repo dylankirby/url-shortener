@@ -13,21 +13,13 @@ const Url = require('../models/Url');
 const User = require('../models/User');
 
 const authMiddleware = (req, res, next) => {
-	if(process.env.NODE_ENV == 'production'){
-		if(req.headers.origin !== process.env.HEROKU_URL) {
-			User.findById(req.body.API_KEY, (err, user) => {
-				if(user){
-					return next()
-				} else {
-					return res.status(401).send("Unauthorized");
-				}
-			})
-		} else {
+	User.findById(req.body.API_KEY, (err, user) => {
+		if(user){
 			return next()
+		} else {
+			return res.status(401).send("Unauthorized");
 		}
-	} else {
-		return next()
-	}
+	});
 }
 
 //Get route, returns frontend
